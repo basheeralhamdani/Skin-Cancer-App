@@ -8,6 +8,10 @@ import tensorflow as tf
 from PIL import Image
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
+import os
+import gdown
+
+from fastapi.middleware.cors import CORSMiddleware
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -21,29 +25,53 @@ app = FastAPI(
                 "Upload an image to the /predict endpoint to get a classification.",
     version="1.0.0"
 )
-
+# prevent connection issues from Flutter app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # --- Configuration ---
-# IMPORTANT: These must match the settings used during model training.
-MODEL_PATH = "skin_canser_model_v2.keras"  # Ensure this path is correct
-TARGET_IMAGE_SIZE = (380, 380) # The image dimensions the model was trained on
+MODEL_PATH = "skin_canser_model_v2.keras"
+GDRIVE_FILE_ID = "1LMFuYrMCbaREm1rondVLuOUBSAmHFy-7" 
+TARGET_IMAGE_SIZE = (380, 380)
 CLASS_NAMES = ['BCC', 'MEL', 'NV']
 model = None
+
+def download_model_from_gdrive():
+    """Downloads the model from Google Drive if it doesn't exist locally."""
+    if not os.path.exists(MODEL_PATH):
+        logging.info(f"Model not found at {MODEL_PATH}. Downloading from Google Drive...")
+        try:
+            url = f'https://drive.google.com/uc?id={GDRIVE_FILE_ID}'
+            gdown.download(url, MODEL_PATH, quiet=False)
+            logging.info("Model downloaded successfully.")
+        except Exception as e:
+            logging.error(f"FATAL: Failed to download model from Google Drive. Error: {e}")
+            traceback.print_exc()
+            # If download fails, the app can't start.
+            # In a real production system, you might want more robust error handling here.
+            raise e
+    else:
+        logging.info("Model already exists locally. Skipping download.")
+
+
 
 # --- FastAPI Lifespan Events ---
 
 @app.on_event("startup")
 async def load_model_on_startup():
     """
-    Loads the TensorFlow/Keras model into memory when the application starts.
-    Includes a "warm-up" phase to reduce latency on the first prediction.
+       Downloads the model if needed, then loads it into memory.
     """
+    download_model_from_gdrive() 
+
     global model
     try:
         logging.info(f"Attempting to load model from: {MODEL_PATH}")
-        # When loading a model with custom objects (like a special loss function),
-        # it's often safer to set compile=False and re-compile if needed for evaluation.
-        # For prediction, compiling is not necessary.
         model = tf.keras.models.load_model(MODEL_PATH, compile=False)
         logging.info("Model loaded successfully.")
         model.summary(print_fn=logging.info)
