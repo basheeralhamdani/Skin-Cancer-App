@@ -1,0 +1,12 @@
+# Configuration for Render.com
+# Version 1
+services:
+- type: web
+  name: Skin-Cancer-App
+  runtime: python
+  pythonVersion: "3.11"  # <-- THIS IS THE CRITICAL FIX
+  repo: https://github.com/basheeralhamdani/Skin-Cancer-App
+  plan: free
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
