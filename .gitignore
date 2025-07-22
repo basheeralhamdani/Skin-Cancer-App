@@ -1,0 +1,5 @@
+myenv1/
+__pycache__/
+*.pyc
+*.ipynb
+*.keras
