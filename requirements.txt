@@ -1,15 +1,16 @@
-# Core Framework
+# Core web framework and server
 fastapi
 uvicorn[standard]
 
-# ML & Data Processing
+# For Machine Learning and data manipulation
 tensorflow
 numpy
+
+# For image processing
 Pillow
 
 # For downloading the model from Google Drive
 gdown
 
-# For CORS (Good practice to include for Flutter web/mobile)
+# Required for FastAPI to handle file uploads from forms
 python-multipart
-fastapi-cors
