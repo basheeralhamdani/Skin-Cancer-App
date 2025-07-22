@@ -1,8 +1,7 @@
 services:
   - type: web
     name: Skin-Cancer-App
-    env: python             # <-- THIS IS THE CORRECT KEY
-    pythonVersion: "3.11"
+    env: python
     repo: https://github.com/basheeralhamdani/Skin-Cancer-App
     plan: free
     region: oregon
