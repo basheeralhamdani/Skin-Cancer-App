@@ -5,5 +5,5 @@ services:
     repo: https://github.com/basheeralhamdani/Skin-Cancer-App
     plan: free
     region: oregon
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --no-cache-dir -r requirements.txt # <-- THE FIX IS HERE
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
