@@ -2,7 +2,7 @@ services:
 - type: web
   name: Skin-Cancer-App
   runtime: python
-  pythonVersion: "3.11" 
+  pythonVersion: "3.11"
   repo: https://github.com/basheeralhamdani/Skin-Cancer-App
   plan: free
   region: oregon
