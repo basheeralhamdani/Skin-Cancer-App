@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1076154535412",
+    "project_id": "diseas-discover",
+    "storage_bucket": "diseas-discover.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076154535412:android:419a432e6789746dc3fda1",
+        "android_client_info": {
+          "package_name": "com.example.diseas_discover"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqep8M1PujFLwo9y0BPC7pQ1gYce4u-jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
