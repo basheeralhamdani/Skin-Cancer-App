@@ -1,0 +1,56 @@
+
+# Python-specific files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+myenv1/
+venv/
+ENV/
+env/
+.env/
+.venv/
+
+# Model files and large data files
+*.keras
+*.h5
+*.model
+*.weights
+*.pb
+*.pkl
+*.joblib
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

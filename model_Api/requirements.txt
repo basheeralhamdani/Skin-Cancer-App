@@ -1,0 +1,16 @@
+# Core web framework and server
+fastapi
+uvicorn[standard]
+
+# For Machine Learning and data manipulation
+tensorflow
+numpy
+
+# For image processing
+Pillow
+
+# For downloading the model from Google Drive
+gdown
+
+# Required for FastAPI to handle file uploads from forms
+python-multipart
